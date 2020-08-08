@@ -1,0 +1,91 @@
+﻿@model List<GLOG_BLOG.Entity.Kullanicilar>
+@{
+    ViewBag.Title = "KullaniciIslemleri";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Content/AdminPageContent/assets/js/jquery.min.js"></script>
+<link href="~/Content/AdminPageContent/assets/plugins/bootstrap-datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row pt-2 pb-2">
+            <div class="col-sm-12">
+                <div class="body">
+                    <h2>Kullanıcı İşlemleri</h2>
+                    <button onclick="window.location.href = '/Admin/KullaniciIslemleri';" class="btn btn-success"> Yeni Kullanıcı </button>
+                    <br />
+                    <br />
+                    <div class="table-responsive">
+                        <table id="kullaniciListesi" class="table table-bordered" cellpadding="0" style="width:100%">
+                            <thead>
+                                <tr class="bg-dark" style="color:white">
+                                    <td>
+                                        Ad Soyad
+                                    </td>
+                                    <td>
+                                        Kullanıcı Adı
+                                    </td>
+                                    <td>
+                                        Yetki
+                                    </td>
+                                    <td>
+                                        E-Mail
+                                    </td>
+                                    <td>
+                                        İşlemler
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.İsim @item.Soyisim
+                                        </td>
+                                        <td>
+                                            @item.Kullanici_Adi
+                                        </td>
+                                        <td>
+                                            @item.Rol_Adi
+                                        </td>
+                                        <td>
+                                            @item.E_Mail
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Bilgi", "KullaniciGuncelle", new { id = item.ID }, new { @class = "btn btn-primary" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Content/AdminPageContent/assets/plugins/bootstrap-datatable/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/AdminPageContent/assets/plugins/bootstrap-datatable/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/Content/AdminPageContent/assets/plugins/bootstrap-datatable/js/dataTables.buttons.min.js"></script>
+
+<script type="text/javascript">
+    var jQueryCalis = $.noConflict(true);
+    (function ($) {
+        $(document).ready(function () {
+            $('#kullaniciListesi').DataTable({
+                "lengthMenu": [[50, 50, -1], [50, 50, "Tümü"]],
+                "ordering": true,
+                "caseInsensitive": false,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+                }
+            });
+            var table = $('#kullaniciListesi').DataTable();
+            $('#kullaniciListesi').show();
+        });
+    })(jQueryCalis);
+</script>

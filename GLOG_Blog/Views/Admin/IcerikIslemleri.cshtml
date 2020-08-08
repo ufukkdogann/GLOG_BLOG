@@ -1,0 +1,77 @@
+﻿@using GLOG_BLOG.Entity
+@model VM_BlogYazilari
+@{
+    ViewBag.Title = "IcerikIslemleri";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Trumbowyg-master/dist/ui/trumbowyg.min.css" rel="stylesheet" />
+<h2>IcerikIslemleri</h2>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row pt-2 pb-2">
+            <div class="col-sm-12">
+                @using (Html.BeginForm("IcerikIslemleri", "Admin", FormMethod.Post))
+                {
+                    <div>
+                        <label class="control-label col-md-6 col-sm-6 ">Başlık</label>
+                    </div>
+                    <div class="col-md-6 col-sm-6  form-group has-feedback">
+
+                        @Html.TextBoxFor(m => m.BlogYazilari.Yazi_Basligi, new { @class = "form-control has-feedback-left", @PlaceHolder = "Başlık", @required = "" })
+                    </div>
+
+                    <div>
+                        <label class="control-label col-md-12 col-sm-12 ">İçerik</label>
+                    </div>
+                    <div class="col-md-12 col-sm-12  form-group has-feedback">
+
+                        @Html.TextAreaFor(m => m.BlogYazilari.Yazi_İcerigi, new { @id = "editor", @class = "form-control has-feedback-left" })
+                    </div>
+                    <br />
+                    <br />
+                    <div>
+                        <div class="col-md-6 col-sm-6">
+                            @Html.HiddenFor(m => m.BlogYazilari.ID)
+                            @Html.HiddenFor(m => m.BlogYazilari.Eklenme_Tarihi)
+                            @Html.HiddenFor(m => m.BlogYazilari.Kullanici_ID)
+                            @Html.HiddenFor(m => m.BlogYazilari.Kategori_ID)
+
+                            <button type="submit" class="btn btn-success">Kaydet</button>
+                        </div>
+                    </div>
+
+                    @*<div>
+                @Html.Raw(Model.BlogYazilari.Yazi_İcerigi)
+            </div>*@
+                }
+                @if (Model != null)
+                {
+                    <div>
+                        <div class="col-md-6 col-sm-6">
+                            @Html.ActionLink("Önizleme", "IcerikOnizleme", new { id = Model.BlogYazilari.ID }, new { @class = "btn btn-warning" })
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="~/Trumbowyg-master/dist/trumbowyg.min.js"></script>
+    <script src="~/Trumbowyg-master/dist/plugins/upload/trumbowyg.cleanpaste.min.js"></script>
+    <script src="~/Trumbowyg-master/dist/plugins/upload/trumbowyg.pasteimage.min.js"></script>
+    <script src="~/Trumbowyg-master/dist/plugins/allowtagsfrompaste/trumbowyg.allowtagsfrompaste.min.js"></script>
+
+    <script>
+        $('#editor').trumbowyg(
+            {
+                lang: 'tr'
+            });
+
+
+    </script>
+}

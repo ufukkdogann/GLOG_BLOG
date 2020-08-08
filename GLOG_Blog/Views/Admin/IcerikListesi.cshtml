@@ -1,0 +1,93 @@
+﻿@model List<GLOG_BLOG.Entity.BlogYazilari>
+@{
+    ViewBag.Title = "IcerikListesi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="~/Content/AdminPageContent/assets/js/jquery.min.js"></script>
+<link href="~/Content/AdminPageContent/assets/plugins/bootstrap-datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row pt-2 pb-2">
+            <div class="col-sm-12">
+                <div class="body">
+                    <h2>İçerik İşlemleri</h2>
+                    <button onclick="window.location.href = '/Admin/IcerikIslemleri';" class="btn btn-success"> Yeni İçerik Oluştur </button>
+                    <br />
+                    <br />
+                    <div class="table-responsive">
+                        <table id="icerikListesi" class="table table-bordered" cellpadding="0" style="width:100%">
+                            <thead>
+                                <tr class="bg-dark" style="color:white">
+                                    <td>
+                                        Başlık
+                                    </td>
+                                    <td>
+                                        Kategori
+                                    </td>
+                                    <td>
+                                        Yazar
+                                    </td>
+                                    <td>
+                                        Eklenme Tarihi
+                                    </td>
+                                    <td>
+                                        İşlemler
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.Yazi_Basligi
+                                        </td>
+                                        <td>
+                                            @item.Kategori_Adi
+                                        </td>
+                                        <td>
+                                            @item.Kullanici_Adi
+                                        </td>
+                                        <td>
+                                            @item.Eklenme_Tarihi
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Detay", "IcerikGuncelle", new { id = item.ID }, new { @class = "btn btn-primary" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Content/AdminPageContent/assets/plugins/bootstrap-datatable/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/AdminPageContent/assets/plugins/bootstrap-datatable/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/Content/AdminPageContent/assets/plugins/bootstrap-datatable/js/dataTables.buttons.min.js"></script>
+
+<script type="text/javascript">
+    var jQueryCalis = $.noConflict(true);
+    (function ($) {
+        $(document).ready(function () {
+            $('#icerikListesi').DataTable({
+                "lengthMenu": [[50, 50, -1], [50, 50, "Tümü"]],
+                "ordering": true,
+                "caseInsensitive": false,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+                }
+            });
+            var table = $('#icerikListesi').DataTable();
+            $('#icerikListesi').show();
+        });
+    })(jQueryCalis);
+</script>
+

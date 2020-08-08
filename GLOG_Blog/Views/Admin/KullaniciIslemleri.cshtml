@@ -1,0 +1,80 @@
+﻿@using GLOG_BLOG.Entity
+@model VM_Kullanicilar
+@{
+    ViewBag.Title = "KullaniciIslemleri";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row pt-2 pb-2">
+            <div class="col-sm-12">
+                @using (Html.BeginForm("KullaniciIslemleri", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div>
+                        <label class="control-label col-md-6 col-sm-6 ">Kullanıcı Adı</label>
+                        <div class="col-md-6 col-sm-6">
+                            @Html.TextBoxFor(m => m.Kullanici.Kullanici_Adi, new { @id = "kullaniciAdi", @class = "form-control has-feedback-left", @PlaceHolder = "Kullanıcı Adı", @required = "" })
+                        </div>
+                        <label class="control-label col-md-6 col-sm-6 ">Parola</label>
+                        <div class="col-md-6 col-sm-6  form-group has-feedback">
+
+                            @Html.TextBoxFor(m => m.Kullanici.Parola, new { @class = "form-control has-feedback-left", type = "password", @PlaceHolder = "Parola", @required = "" })
+                        </div>
+                        <label class="control-label col-md-6 col-sm-6 ">E-Mail</label>
+                        <div class="col-md-6 col-sm-6  form-group has-feedback">
+
+                            @Html.TextBoxFor(m => m.Kullanici.E_Mail, new { @class = "form-control has-feedback-left", @PlaceHolder = "E-Mail", @required = "" })
+                        </div>
+                        <label class="control-label col-md-6 col-sm-6 ">İsim</label>
+                        <div class="col-md-6 col-sm-6  form-group has-feedback">
+
+                            @Html.TextBoxFor(m => m.Kullanici.İsim, new { @class = "form-control has-feedback-left", @PlaceHolder = "İsim", @required = "" })
+                        </div>
+                        <label class="control-label col-md-6 col-sm-6 ">Soyisim</label>
+                        <div class="col-md-6 col-sm-6  form-group has-feedback">
+
+                            @Html.TextBoxFor(m => m.Kullanici.Soyisim, new { @class = "form-control has-feedback-left", @PlaceHolder = "Soyisim", @required = "" })
+
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <label class="control-label col-md-6 col-sm-6 ">Aktif mi?</label>
+                                <div class="demo-checkbox">
+                                    @Html.CheckBoxFor(m => m.Kullanici.IsActive, new { style = "width:50px;height:50px" })
+                                    <input type="checkbox" id="x" checked />
+                                </div>
+                                @Html.HiddenFor(m => m.Kullanici.ID)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="control-label col-md-6 col-sm-6 ">Rol Seçiniz</label>
+                        <div class="col-md-6 col-sm-6">
+                            @Html.DropDownListFor(m => m.Kullanici.Rol_ID, new SelectList(Model.RolListesi, "ID", "Rol_Adi"), new { @class = "form-control", @style = "float: right;text-align: right" })
+                        </div>
+                    </div>
+                    @*<br />
+                        <br />
+                        <div>
+                            <div class="col-md-6 col-sm-6">
+                                <button type="submit" class="btn btn-warning">Deaktif Et</button>
+                            </div>
+                        </div>*@
+                    <br />
+                    <br />
+                    <div>
+                        <div class="col-md-6 col-sm-6">
+                            @Html.HiddenFor(m => m.Kullanici.ID)
+                            <button type="submit" class="btn btn-success">Kaydet</button>
+                        </div>
+                    </div>
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+

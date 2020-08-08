@@ -1,0 +1,18 @@
+﻿@using GLOG_BLOG.Entity
+@model VM_BlogYazilari
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>İçerik Önizleme</h2>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row pt-2 pb-2">
+            <div class="col-sm-12">
+                <div>
+                    @Html.Raw(Model.BlogYazilari.Yazi_İcerigi)
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
